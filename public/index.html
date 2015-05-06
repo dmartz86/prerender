@@ -4,37 +4,52 @@
   <meta charset="UTF-8">
   <title>HTML Prerender</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body ng-app="WebsiteApp">
   <div class="container" ng-controller="HomeCtrl">
+    <div class="row">
+      <h2 class="text-center col-md-8">Prerender HTML</h2>
+      <a class="col-md-1 col-md-offset-2 btn btn-primary">
+        <div><i class="fa fa-users fa-3x"><span ng-bind="numUsers">0</span></i></div>
+      </a>
+    </div>
     <div class="jumbotron">
       <div class="row">
         <div class="form-group col-md-6">
-          <h2 class="text-center">Target website</h2>
+
           <form name="searchForm">
-            <input class="form-control input-lg" required=""
-              ng-model="website" type="url"/>
-            <a class="btn btn-success btn-lg col-md-12"
-              ng-disabled="searchForm.$invalid"
-              ng-click="search()" id="searchBtn"> Search</a>
+            <div class="input-group">
+              <input class="form-control input-lg" required=""
+                placeholder="Any website here"
+                ng-model="website" type="url"/>
+
+              <span class="input-group-btn">
+                <button class="btn btn-success btn-lg col-md-12"
+                  ng-disabled="searchForm.$invalid" type="button"
+                  ng-click="search()" id="searchBtn">Search
+                    <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+
           </form>
         </div>
         <div class="col-md-6 form-group">
           <p ng-bind="message"></p>
-          <p ng-bind="'There are: ' + numUsers + ' users connected'"></p>
         </div>
       </div>
     </div>
     <div class="row" ng-show="templates.length">
-      <div class="col-md-6 form-group">
-        <h4 class="text-center">Select template</h4>
+      <div class="col-md-6 form-group" style="height: 200px;overflow: scroll;">
+        <h3 class="text-center">Template list</h3>
         <a class="btn btn-primary form-control"
           ng-click="setTemplate(t.url)"
           ng-repeat="t in templates">
           <span ng-bind="t.name"></span>
         </a>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" style="height: 200px;overflow: scroll;">
         <div ng-include="template"></div>
       </div>
     </div>
